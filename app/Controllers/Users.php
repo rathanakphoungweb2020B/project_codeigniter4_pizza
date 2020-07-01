@@ -12,7 +12,7 @@ class Users extends BaseController
 		if($this->request->getMethod() == 'post'){
 
 			$rules = [
-				'email' => 'required|valid_email',
+				'email' => 'trim|required|valid_email',
 				'password' => 'required|validateUser[email,password]',
 			];
 
@@ -41,10 +41,13 @@ class Users extends BaseController
 	private function setUserSession($user){
 
 		$data = [
+
 			'id' => $user['id'],
 			'email' => $user['email'],
+			'password' => $user['password'],
 			'address' => $user['address'],
-			'isLoggedIn' => true,
+			'role' => $user['role'],
+			
 		];
 
 		session()->set($data);
@@ -61,8 +64,8 @@ class Users extends BaseController
 		if($this->request->getMethod() == 'post'){
 
 			$rules = [
-				'email' => 'required|valid_email|is_unique[users.email]',
-				'password' => 'required',
+				'email' => 'trim|required|valid_email',
+				'password' => 'required|trim',
 				'address' => 'required'
 			];
 
@@ -75,6 +78,7 @@ class Users extends BaseController
 					'email' =>$this->request->getVar('email'),
 					'password' =>$this->request->getVar('password'),
 					'address' =>$this->request->getVar('address'),
+					'role' =>$this->request->getVar('role'),
 				];
 
 				$model->createUser($newData);
@@ -93,5 +97,7 @@ class Users extends BaseController
 		$session()->destroy();
 		return redirect()->to('/');
 	}
-
 }
+
+
+

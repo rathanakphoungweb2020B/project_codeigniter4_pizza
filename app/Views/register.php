@@ -11,6 +11,7 @@
         <img src="images/logo.svg" alt="" width="50">
         Peperoni App
         </h3>
+        
         <div>
           <div class="form-group">
             <label class="text-uppercase small">Email</label>
@@ -37,7 +38,7 @@
 
           <div class="form-check">
             <label class="form-check-label">
-                <input type="checkbox" class="form-check-input" value="">I'm a manager
+                <input type="checkbox" class="form-check-input" name="role" value="1">I'm a manager
             </label>
           </div>
         </div>
@@ -56,3 +57,4 @@
   </div>
 </div>
 <?= $this->endSection() ?>
+

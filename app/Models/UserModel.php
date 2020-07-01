@@ -7,7 +7,7 @@ class UserModel extends Model
     protected $table      = 'users';
     protected $primaryKey = 'id';
     protected $returnType     = 'array';
-    protected $allowedFields = ['email', 'password', 'address'];
+    protected $allowedFields = ['email', 'password', 'address', 'role'];
 
     public function createUser($userInfo){
         
@@ -15,7 +15,16 @@ class UserModel extends Model
             'email' => $userInfo['email'],
             'password' => password_hash($userInfo['password'], PASSWORD_DEFAULT),
             'address' => $userInfo['address'],
+            'role' => $userInfo['role'],
         ]);
     }
 
 }
+
+
+
+
+
+
+
+

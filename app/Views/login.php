@@ -6,8 +6,9 @@
       <img height="90" src="images/logo.svg" alt="">
     </div>
   </div>
+  
   <div class="auth__body">
-    <form class="auth__form" autocomplete="off" action="/" method="post">
+    <form class="auth__form" autocomplete="off" action="" method="post">
       <div class="auth__form_body">
         <h3 class="auth__form_title">Peperoni App</h3>
         <hr>
@@ -23,6 +24,7 @@
             <label class="text-uppercase small">Email</label>
             <input type="email" class="form-control" placeholder="Enter email" name="email" id="email" value="<?= set_value('email'); ?>">
           </div>
+          
           <div class="form-group">
             <label class="text-uppercase small">Password</label>
             <input type="password" class="form-control" placeholder="Password" name="password" id="password" value="">
