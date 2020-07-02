@@ -38,6 +38,11 @@ $routes->add('logout', 'Users::logout');
 $routes->add('index', 'Dashboard::index');
 $routes->add('create', 'Dashboard::create');
 $routes->add('remove/(:num)', 'Dashboard::delete/$1');
+$routes->add('edit/(:num)', 'Dashboard::edit/$1');
+$routes->add('update', 'Dashboard::update');
+
+
+
 
 
 

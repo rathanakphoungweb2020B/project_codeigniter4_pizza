@@ -24,6 +24,7 @@
 				<hr>
 				<table class="table table-borderless table-hover">
 					<tr>
+						<th class = "hide">ID</th>
 						<th>Name</th>
 						<th>Ingredients</th>
 						<th>Prize</th>
@@ -34,14 +35,15 @@
 					
 					<?php foreach($pizzas as $piz): ?>
 						<tr>
+							<td class="hide"><?= $piz['id'] ?></td>
 							<td class="pizzaName"> <?= $piz['pizza'] ?> </td>
 							<td> <?= $piz['ingredient'] ?> </td>
 							<td class="text-success font-weight-bolder"> <?= $piz['prize'] ?>$ </td>
 							<td>
 							
 								<?php if(session()->get('role') == 1): ?>
-									<a href="" data-toggle="modal" data-target="#updatePizza">
-										<i class="material-icons text-info" data-toggle="tooltip" title="Edit Pizza!" data-placement="left">edit</i>
+									<a href="edit/<?= $piz['id'] ?>" data-toggle="modal" data-target="#updatePizza">
+										<i class="material-icons text-info editPizza" data-toggle="tooltip" title="Edit Pizza!" data-placement="left">edit</i>
 									</a>
 
 									<a href="remove/<?= $piz['id'] ?>" data-toggle="tooltip" title="Delete Pizza!" data-placement="right">
@@ -79,10 +81,10 @@
 					<input type="text" class="form-control" placeholder="Pizza name" name="pizza">
 				</div>
 				<div class="form-group">
-					<input type="number" class="form-control" placeholder="Prize in dollars" name="prize">
+					<textarea name="ingredient" placeholder="Ingredients" class="form-control"></textarea>
 				</div>
 				<div class="form-group">
-					<textarea name="ingredient" placeholder="Ingredients" class="form-control"></textarea>
+					<input type="number" class="form-control" placeholder="Prize in dollars" name="prize">
 				</div>
 			<a data-dismiss="modal" class="closeModal">DISCARD</a>
 		 	 &nbsp;
@@ -117,16 +119,22 @@
         
         <!-- Modal body -->
         <div class="modal-body text-right">
-			<form  action="/" method="post">
+			<form  action="update" method="post">
+				<input type="hidden" name = "id" id = "id" >
 				<div class="form-group">
-					<input type="text" class="form-control" value="Rady Pizza">
+					<input type="text" class="form-control" name = "pizza" id = "name">
 				</div>
 				<div class="form-group">
-					<input type="number" class="form-control" value="100">
+					<textarea   class="form-control" name = "ingredient" id = "ingredients" ></textarea>
 				</div>
 				<div class="form-group">
-					<textarea name=""  class="form-control">Cheese, Tomatoes, Chicken, Salad</textarea>
+					<input type="text" class="form-control" name = "prize" id = "prize" >
 				</div>
+				<?php if(isset($validation)): ?>
+					<div class="alert alert-danger" role="alert">
+						<?= $validation->listErrors(); ?>
+					</div>
+          		<?php endif; ?>
 			<a data-dismiss="modal" class="closeModal">DISCARD</a>
 		 	 &nbsp;
 		  <input type="submit" value="UPDATE" class="createBtn text-warning">
@@ -137,6 +145,10 @@
   </div>
   <!-- =================================END MODEL UPDATE==================================================== -->
 <?= $this->endSection() ?>
+
+
+
+
 
 
 

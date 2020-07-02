@@ -65,7 +65,49 @@ class Dashboard extends BaseController
 
 	//--------------------------------------------------------------------
 
+	public function update()
+	{
+		helper(['form']);
+		$data = [];
+
+		if($this->request->getMethod() == 'post'){
+
+			$rules = [
+				'pizza' => 'required|alpha_space',
+				'ingredient' => 'required',
+				'prize' => 'required|min_length[1]|max_length[50]|numeric'
+			];
+
+			if(!$this->validate($rules)){
+				$data['validation'] = $this->validator; 
+			}else{
+				$pizza = new PizzaModel();
+				$id = $this->request->getVar('id');
+				$newData = [
+					'name' =>$this->request->getVar('name'),
+					'ingredient' =>$this->request->getVar('ingredient'),
+					'prize' =>$this->request->getVar('prize'),
+				];
+
+				$pizza->update($id,$newData);
+				return redirect()->to('/index');
+			}
+		}
+
+		return view('index', $data);
+	}
+	
+	public function edit($id)
+    {
+        $pizza = new PizzaModel();
+        $data['edit']= $pizza->find($id);
+        return view('index', $data);
+    }
+
 }
+
+
+
 
 
 
